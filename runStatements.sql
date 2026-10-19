@@ -25,7 +25,7 @@ CROSS JOIN LATERAL (
     JOIN CLIENTE_VEHICULO cv ON cv.id_cliente_vehiculo = ct.id_cliente_vehiculo
     JOIN VEHICULO v ON v.patente_vehiculo = cv.patente_vehiculo
     JOIN MODELO m ON m.id_modelo = v.id_modelo
-    WHERE ct.id_edificio = e.id_edificio
+    WHERE ct.id_edificio = e.id_edificio AND ct.estado = 'Activo'
     GROUP BY m.id_modelo, m.nombre_modelo
     ORDER BY cantidad_vehiculos ASC
     LIMIT 3
@@ -61,7 +61,8 @@ LEFT JOIN LUGAR l
        ON l.id_edificio = e.id_edificio
       AND l.id_lugar NOT IN (SELECT lc.id_lugar
                              FROM LUGAR_CLIVEH lc
-                             JOIN CONTRATO ct ON ct.id_lugar_cliveh = lc.id_lugar_cliveh)
+                             JOIN CONTRATO ct ON ct.id_lugar_cliveh = lc.id_lugar_cliveh
+							 WHERE ct.estado = 'Activo')
 GROUP BY e.id_edificio, e.nombre_edificio
 ORDER BY lugares_disponibles DESC
 LIMIT 3;
@@ -73,7 +74,8 @@ LEFT JOIN LUGAR l
        ON l.id_edificio = e.id_edificio
       AND l.id_lugar NOT IN (SELECT lc.id_lugar
                              FROM LUGAR_CLIVEH lc
-                             JOIN CONTRATO ct ON ct.id_lugar_cliveh = lc.id_lugar_cliveh)
+                             JOIN CONTRATO ct ON ct.id_lugar_cliveh = lc.id_lugar_cliveh
+							 WHERE ct.estado = 'Activo')
 GROUP BY e.id_edificio, e.nombre_edificio
 ORDER BY lugares_disponibles ASC
 LIMIT 3;
