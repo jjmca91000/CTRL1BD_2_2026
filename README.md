@@ -17,3 +17,10 @@ docker exec -i control_1 psql -U postgres -d estacionamientos < runStatements.sq
 ```
 
 OBS: Los resultados de las query se pueden ver en el documento de texto generado 'resultados.txt'.
+
+Finalmente, para apagar y borrar el contenedor de Docker se ejecutan los siguientes dos comandos:
+
+```
+docker stop control_1
+docker rm control_1
+```
